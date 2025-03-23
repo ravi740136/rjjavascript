@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Form Submission</title>
+</head>
+<body>
+
+    <h2>AJAX Form Submission to Spring Boot</h2>
+
+    <form id="userForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <span id="nameError" style="color: red;"></span>
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <span id="emailError" style="color: red;"></span>
+        <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="responseMessage" style="margin-top: 20px; font-weight: bold;"></div>
+
+    <script>
+        document.getElementById("userForm").addEventListener("submit", function(event) {
+            event.preventDefault();  // Prevent default form submission
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let nameError = document.getElementById("nameError");
+            let emailError = document.getElementById("emailError");
+            let responseMessage = document.getElementById("responseMessage");
+
+            let isValid = true;
+
+            // Clear previous error messages
+            nameError.innerText = "";
+            emailError.innerText = "";
+            responseMessage.innerText = "";
+
+            // Validate Name
+            if (name === "") {
+                nameError.innerText = "Name is required.";
+                isValid = false;
+            }
+
+            // Validate Email
+            if (email === "") {
+                emailError.innerText = "Email is required.";
+                isValid = false;
+            } else if (!email.match(/^\S+@\S+\.\S+$/)) {
+                emailError.innerText = "Invalid email format.";
+                isValid = false;
+            }
+
+            if (!isValid) {
+                return;
+            }
+
+            // Prepare Data for Submission
+            let formData = { name: name, email: email };
+
+            // Send AJAX Request to Spring Boot Controller
+            fetch("/rjjavascript/adduser", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                responseMessage.innerText = "Server Response: " + data.message;
+            })
+            .catch(error => {
+                responseMessage.innerText = "Error submitting form.";
+            });
+        });
+    </script>
+
+</body>
+</html>

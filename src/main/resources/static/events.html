@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Events Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 20px;
+        }
+        button, input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        .box {
+            width: 150px;
+            height: 150px;
+            background-color: lightblue;
+            margin: auto;
+            border: 2px solid blue;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>JavaScript Events Demo</h2>
+
+    <!-- Mouse Events -->
+    <h3>Mouse Events</h3>
+    <button onclick="onClickEvent()">Click Me</button>
+    <button onmouseover="onMouseOver()" onmouseout="onMouseOut()">Hover Me</button>
+    <p id="mouseEventResult">Mouse event result will appear here.</p>
+
+    <!-- Keyboard Events -->
+    <h3>Keyboard Events</h3>
+    <input type="text" id="textInput" onkeyup="onKeyUpEvent()" placeholder="Type something...">
+    <p id="keyEventResult">Key event result will appear here.</p>
+
+    <!-- Form Events -->
+    <h3>Form Events</h3>
+    <form onsubmit="return onFormSubmit(event)">
+        <input type="text" id="name" placeholder="Enter your name" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="formEventResult"></p>
+
+    <!-- Window Events -->
+    <h3>Window Events</h3>
+    <button onclick="openNewWindow()">Open New Window</button>
+    <button onclick="resizeNewWindow()">Resize Window</button>
+
+    <!-- Box for Mouse Events -->
+    <h3>Div Box (Move & Click Events)</h3>
+    <div class="box" id="box" onclick="onBoxClick()" onmousemove="onMouseMove(event)">
+    </div>
+    <p id="boxEventResult">Box event result will appear here.</p>
+
+    <script>
+        // ✅ Mouse Events
+        function onClickEvent() {
+            document.getElementById("mouseEventResult").innerText = "Button Clicked!";
+        }
+
+        function onMouseOver() {
+            document.getElementById("mouseEventResult").innerText = "Mouse Over the Button!";
+        }
+
+        function onMouseOut() {
+            document.getElementById("mouseEventResult").innerText = "Mouse Left the Button!";
+        }
+
+        // ✅ Keyboard Events
+        function onKeyUpEvent() {
+            let text = document.getElementById("textInput").value;
+            document.getElementById("keyEventResult").innerText = "You typed: " + text;
+        }
+
+        // ✅ Form Events
+        function onFormSubmit(event) {
+            event.preventDefault(); // Prevent form submission
+            let name = document.getElementById("name").value;
+            document.getElementById("formEventResult").innerText = "Form Submitted! Name: " + name;
+            return false;
+        }
+        let newWindow;
+
+        function openNewWindow() {
+            newWindow = window.open(
+                "about:blank",  // Use a blank page instead of Google
+                "_blank",
+                "width=400,height=300,resizable=yes"
+            );
+
+            if (newWindow) {
+                newWindow.document.write("<h2>This is a new window</h2>");
+                newWindow.document.close();  // Ensure content is loaded
+            }
+        }
+
+        function resizeNewWindow() {
+            if (newWindow && !newWindow.closed) {
+                newWindow.resizeTo(800, 600);
+            } else {
+                alert("Please open the window first!");
+            }
+        }
+
+
+
+        // ✅ Div Box Events (Mouse Move & Click)
+        function onBoxClick() {
+            document.getElementById("boxEventResult").innerText = "Box Clicked!";
+        }
+
+        function onMouseMove(event) {
+            let x = event.clientX;
+            let y = event.clientY;
+            document.getElementById("boxEventResult").innerText = "Mouse Position: (" + x + ", " + y + ")";
+        }
+    </script>
+
+</body>
+</html>

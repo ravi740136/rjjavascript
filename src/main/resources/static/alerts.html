@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Alerts Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>JavaScript Alerts Demo</h2>
+
+    <button onclick="showAlert()">Simple Alert</button>
+    <button onclick="showConfirm()">Confirmation Alert</button>
+    <button onclick="showPrompt()">Prompt Alert</button>
+    <button onclick="customAlert()">Custom Alert (HTML)</button>
+
+    <div id="result" style="margin-top: 20px; font-size: 18px; color: blue;"></div>
+
+    <script>
+        // 1️⃣ Simple Alert
+        function showAlert() {
+            alert("This is a simple alert!");
+        }
+
+        // 2️⃣ Confirmation Alert
+        function showConfirm() {
+            let userResponse = confirm("Are you sure you want to proceed?");
+            if (userResponse) {
+                document.getElementById("result").innerText = "You clicked OK!";
+            } else {
+                document.getElementById("result").innerText = "You clicked Cancel!";
+            }
+        }
+
+        // 3️⃣ Prompt Alert (Takes User Input)
+        function showPrompt() {
+            let userName = prompt("What is your name?");
+            if (userName) {
+                document.getElementById("result").innerText = "Hello, " + userName + "!";
+            } else {
+                document.getElementById("result").innerText = "You didn't enter your name.";
+            }
+        }
+
+        // 4️⃣ Custom Alert Using InnerHTML
+        function customAlert() {
+            document.getElementById("result").innerHTML = `
+                <div style="padding: 10px; background-color: lightyellow; border: 1px solid orange;">
+                    <strong>Custom Alert:</strong> This is a styled alert!
+                </div>
+            `;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #dynamicBox {
+            width: 200px;
+            height: 50px;
+            background-color: lightblue;
+            margin: 20px auto;
+            line-height: 50px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .new-item {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>DOM Manipulation Demo</h2>
+
+    <!-- Change Text Content -->
+    <button onclick="changeText()">Change Text</button>
+    <p id="textElement">Original Text</p>
+
+    <!-- Change Styles -->
+    <button onclick="changeStyle()">Change Style</button>
+    <div id="dynamicBox">Styled Box</div>
+
+    <!-- Add New Element -->
+    <button onclick="addElement()">Add New Item</button>
+    <ul id="listContainer"></ul>
+
+    <!-- Remove an Element -->
+    <button onclick="removeElement()">Remove Last Item</button>
+
+    <!-- Dynamic Event Handling -->
+    <button onclick="addEventListenerToBox()">Click Box to Change Color</button>
+
+    <script>
+        // 1. Changing Text Content
+        function changeText() {
+            document.getElementById("textElement").innerText = "Text Updated!";
+        }
+
+        // 2. Changing Styles Dynamically
+        function changeStyle() {
+            let box = document.getElementById("dynamicBox");
+            box.style.backgroundColor = "orange";
+            box.style.color = "white";
+            box.style.borderRadius = "10px";
+        }
+
+        // 3. Adding a New Element
+        function addElement() {
+            let list = document.getElementById("listContainer");
+            let newItem = document.createElement("li");
+            newItem.innerText = "New Item Added!";
+            newItem.classList.add("new-item"); // Adding CSS class
+            list.appendChild(newItem);
+        }
+
+        // 4. Removing an Element
+        function removeElement() {
+            let list = document.getElementById("listContainer");
+            if (list.lastChild) {
+                list.removeChild(list.lastChild);
+            } else {
+                alert("No items left to remove!");
+            }
+        }
+
+        // 5. Handling Events Dynamically
+        function addEventListenerToBox() {
+            let box = document.getElementById("dynamicBox");
+            box.addEventListener("click", function () {
+                box.style.backgroundColor = box.style.backgroundColor === "red" ? "lightblue" : "red";
+            });
+            alert("Click on the box to change its color!");
+        }
+    </script>
+
+</body>
+</html>

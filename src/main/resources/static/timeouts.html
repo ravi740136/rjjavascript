@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout & setInterval Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        button { margin: 10px; padding: 10px 15px; font-size: 16px; }
+        #clock { font-size: 24px; margin: 20px; }
+    </style>
+</head>
+<body>
+    <h2>setTimeout & setInterval Example</h2>
+
+    <!-- setTimeout Demo -->
+    <button onclick="showDelayedMessage()">Show Delayed Message</button>
+    <p id="timeoutMessage">Click the button to display a message after 3 seconds.</p>
+
+    <!-- setInterval Timer Demo -->
+    <h3>Live Clock</h3>
+    <p id="clock">00:00:00</p>
+    
+    <button onclick="startClock()">Start Clock</button>
+    <button onclick="stopClock()">Stop Clock</button>
+    <button onclick="resetClock()">Reset Clock</button>
+
+    <script>
+        // ✅ setTimeout Example
+        function showDelayedMessage() {
+            let messageElement = document.getElementById("timeoutMessage");
+
+            // Step 1: Show "Waiting..." message immediately
+            messageElement.innerText = "Waiting for 3 seconds...";
+
+            // Step 2: After 3 seconds, show the actual message
+            setTimeout(function () {
+                messageElement.innerText = "🎉 This message appeared after 3 seconds!";
+            }, 3000);
+
+            // Step 3: Reset message after 6 seconds for better experience
+            setTimeout(function () {
+                messageElement.innerText = "Click the button to display a message after 3 seconds.";
+            }, 6000);
+        }
+
+        // ✅ setInterval Example (Live Clock)
+        let intervalId;
+        
+        function updateClock() {
+            let now = new Date();
+            document.getElementById("clock").innerText = now.toLocaleTimeString();
+        }
+
+        function startClock() {
+            if (!intervalId) {
+                intervalId = setInterval(updateClock, 1000);
+            }
+        }
+
+        function stopClock() {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+
+        function resetClock() {
+            stopClock();
+            document.getElementById("clock").innerText = "00:00:00";
+        }
+    </script>
+</body>
+</html>

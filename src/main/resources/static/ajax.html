@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Demo</title>
+</head>
+<body>
+    <h2>AJAX Demo Using XMLHttpRequest</h2>
+    <button onclick="fetchMessage()">Fetch Message</button>
+    <div id="responseArea" style="margin-top: 20px; padding: 10px; border: 1px solid black;">
+        <strong>Response:</strong>
+        <p id="responseText">Click the button to fetch data...</p>
+    </div>
+
+    <script>
+        function fetchMessage() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "/rjjavascript/api/message", true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {  // Request completed
+                    if (xhr.status === 200) {  // Success
+                        document.getElementById("responseText").innerHTML = xhr.responseText;
+                    } else {  // Error handling
+                        document.getElementById("responseText").innerHTML = "Error fetching message.";
+                    }
+                }
+            };
+
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
