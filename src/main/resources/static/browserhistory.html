@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser History Demo</title>
+    <script>
+        function goBack() {
+            history.back(); // Go back to the previous page
+        }
+
+        function goForward() {
+            history.forward(); // Go forward to the next page
+        }
+
+        function goToPage() {
+            let steps = prompt("Enter how many steps to move (+ forward, - backward):", "0");
+            if (!isNaN(steps) && steps !== null) {
+                history.go(parseInt(steps)); // Move forward/backward by entered number
+            }
+        }
+
+        function showHistoryLength() {
+            alert("Number of pages in history: " + history.length);
+        }
+    </script>
+</head>
+<body>
+    <h2>Browser History API Demo</h2>
+    <p>Use the buttons below to navigate through browser history.</p>
+
+    <button onclick="goBack()">🔙 Go Back</button>
+    <button onclick="goForward()">🔜 Go Forward</button>
+    <button onclick="goToPage()">📌 Go to Specific Page</button>
+    <button onclick="showHistoryLength()">📊 Show History Length</button>
+
+    <p><strong>Note:</strong> This demo works best when you navigate between multiple pages.</p>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON in JavaScript Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        button { padding: 10px 15px; font-size: 16px; margin: 10px; cursor: pointer; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h2>JSON Features Demo</h2>
+
+    <button onclick="showJson()">Display JSON Data</button>
+    <button onclick="modifyJson()">Modify JSON</button>
+     <button onclick="stringifyTest()">Show JSON variation</button>
+
+    <h3>JSON Output:</h3>
+    <pre id="jsonOutput">Click "Display JSON Data" to see JSON here.</pre>
+
+    <script>
+        // Step 1: Creating a JSON object
+        let person = {
+            name: "John Doe",
+            age: 30,
+            email: "johndoe@example.com",
+            address: {
+                city: "New York",
+                zip: "10001"
+            },
+            hobbies: ["Reading", "Traveling", "Coding"]
+        };
+
+        function showJson() {
+            // Step 2: Convert JavaScript object to JSON string
+            let jsonString = JSON.stringify(person, null, 4); // Pretty format JSON
+            document.getElementById("jsonOutput").innerText = jsonString;
+        }
+
+        function modifyJson() {
+            // Step 3: Modify JSON data
+            person.age += 1;  // Increase age by 1
+            person.hobbies.push("Photography"); // Add a new hobby
+
+            // Step 4: Display modified JSON
+            let updatedJson = JSON.stringify(person, null, 4);
+            document.getElementById("jsonOutput").innerText = updatedJson;
+        }
+        
+        function stringifyTest() {
+            let person = { name: "John", age: 30, city: "New York" };
+
+            // Convert object to JSON (no formatting)
+            let jsonString1 = JSON.stringify(person);
+            
+            // Convert object to formatted JSON (pretty-print)
+            let jsonString2 = JSON.stringify(person, null, 4);
+
+            // Using replacer function to exclude "age"
+            let jsonString3 = JSON.stringify(person, (key, value) => key === "age" ? undefined : value, 2);
+
+            // Display results in the pre tag
+            document.getElementById("jsonOutput").innerText = 
+                "🔹 Without Formatting:\n" + jsonString1 + "\n\n" +
+                "🔹 Pretty-Printed JSON:\n" + jsonString2 + "\n\n" +
+                "🔹 Excluding 'age':\n" + jsonString3;
+        }
+    </script>
+</body>
+</html>

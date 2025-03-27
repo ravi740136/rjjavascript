@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Demo</title>
+</head>
+<body>
+
+    <h2>Cookie Demo: Manage User Preferences</h2>
+    
+    <p><strong>Username:</strong> <span id="username"></span></p>
+    <p><strong>Theme:</strong> <span id="theme"></span></p>
+
+    <button onclick="changeUsername()">Change Username</button>
+    <button onclick="toggleTheme()">Toggle Theme</button>
+
+    <script>
+        // ✅ Function to get a specific cookie value
+      /*  function getCookie(name) {
+            let cookies = document.cookie.split("; ");
+            for (let i = 0; i < cookies.length; i++) {
+                let [key, value] = cookies[i].split("=");
+                if (key === name) return value;
+            }
+            return null;
+        }*/
+
+        function getCookie(name) {
+            let cookies = document.cookie.split("; ");
+            let cookieObj = {};
+            
+            cookies.forEach(cookie => {
+                let [key, value] = cookie.split("=");
+                cookieObj[key] = value; // This ensures the latest value is stored
+            });
+
+            return cookieObj[name] || null;
+        }
+
+        
+        
+        // ✅ Function to update cookies in the document
+        function updateDisplay() {
+            document.getElementById("username").innerText = getCookie("username") || "Not Set";
+            document.getElementById("theme").innerText = getCookie("theme") || "Not Set";
+        }
+
+        // ✅ Change Username
+        function changeUsername() {
+            let newUsername = prompt("Enter new username:");
+            if (newUsername) {
+                document.cookie = `username=${newUsername}; path=/`;
+                updateDisplay();
+            }
+        }
+
+        // ✅ Toggle Theme
+        function toggleTheme() {
+            let currentTheme = getCookie("theme") === "light" ? "dark" : "light";
+            document.cookie = `theme=${currentTheme}; path=/`;
+            updateDisplay();
+        }
+
+        // ✅ Initialize Display
+        updateDisplay();
+    </script>
+
+</body>
+</html>

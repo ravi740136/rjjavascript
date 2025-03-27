@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Handling Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        let newWindow; // Store reference to opened window
+
+        function openWindow() {
+            newWindow = window.open(
+                "https://www.google.com",  // URL to open
+                "ExampleWindow",  // Name of the window
+                "width=600,height=400,top=100,left=100" // Features
+            );
+        }
+
+        function closeWindow() {
+            if (newWindow && !newWindow.closed) {
+                newWindow.close();
+            } else {
+                alert("No window is open!");
+            }
+        }
+
+        function resizeWindow() {
+            if (newWindow && !newWindow.closed) {
+                newWindow.resizeTo(800, 600); // Resize the window
+            } else {
+                alert("Open a window first!");
+            }
+        }
+
+        function moveWindow() {
+            if (newWindow && !newWindow.closed) {
+                newWindow.moveTo(200, 200); // Move window to a new position
+            } else {
+                alert("Open a window first!");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Window Handling Demo</h2>
+    
+    <button onclick="openWindow()">Open New Window</button>
+    <button onclick="closeWindow()">Close Window</button>
+    <button onclick="resizeWindow()">Resize Window</button>
+    <button onclick="moveWindow()">Move Window</button>
+</body>
+</html>

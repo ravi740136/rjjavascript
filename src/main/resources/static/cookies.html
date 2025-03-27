@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies Demo</title>
+    <script>
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+
+        // Function to get a cookie by name
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let cookiesArray = document.cookie.split(';');
+            for (let i = 0; i < cookiesArray.length; i++) {
+                let cookie = cookiesArray[i];
+                while (cookie.charAt(0) === ' ') cookie = cookie.substring(1);
+                if (cookie.indexOf(nameEQ) === 0) return cookie.substring(nameEQ.length, cookie.length);
+            }
+            return null;
+        }
+
+        // Function to delete a cookie
+        function deleteCookie(name) {
+            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+
+        function showCookies() {
+            document.getElementById("cookieOutput").innerText = "Cookies: " + document.cookie;
+        }
+    </script>
+</head>
+<body>
+    <h2>JavaScript Cookies Demo</h2>
+    <button onclick="setCookie('user', 'John Doe', 7)">Set Cookie</button>
+    <button onclick="alert('User: ' + getCookie('user'))">Get Cookie</button>
+    <button onclick="deleteCookie('user'); alert('Cookie Deleted')">Delete Cookie</button>
+    <button onclick="showCookies()">Show All Cookies</button>
+    <p id="cookieOutput">Cookies: </p>
+</body>
+</html>

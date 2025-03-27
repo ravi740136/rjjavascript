@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Location Object Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+    <script>
+        function showLocationDetails() {
+            let details = `
+                href: ${window.location.href}
+                protocol: ${window.location.protocol}
+                hostname: ${window.location.hostname}
+                port: ${window.location.port}
+                pathname: ${window.location.pathname}
+                search (Query Params): ${window.location.search}
+                hash: ${window.location.hash}
+            `;
+            document.getElementById("locationDetails").innerText = details;
+        }
+
+        function reloadPage() {
+            location.reload();  // Reload the page
+        }
+
+        function redirectToGoogle() {
+            window.location.href = "https://www.google.com";  // Redirect to Google
+        }
+
+        function openNewTab() {
+            window.open("https://www.wikipedia.org", "_blank");  // Open Wikipedia in a new tab
+        }
+    </script>
+</head>
+<body>
+    <h2>JavaScript Location Object Demo</h2>
+    
+    <button onclick="showLocationDetails()">Show Location Details</button>
+    <button onclick="reloadPage()">Reload Page</button>
+    <button onclick="redirectToGoogle()">Redirect to Google</button>
+    <button onclick="openNewTab()">Open Wikipedia in New Tab</button>
+    
+    <h3>Location Details:</h3>
+    <pre id="locationDetails">Click "Show Location Details" to see details here.</pre>
+</body>
+</html>
